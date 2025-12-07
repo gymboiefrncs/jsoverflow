@@ -20,9 +20,3 @@ export const logout = (req, res, next) => {
     return res.status(200).json({ message: "logged out" });
   });
 };
-
-export const test = (req, res) => {
-  if (!req.session.userId)
-    return res.status(401).send("Session expired or not logged in");
-  res.send(`Hello user ${req.session.username}`);
-};
