@@ -27,3 +27,9 @@ export const updateContent = async (updateContent, postId) => {
   );
   return result.rows[0];
 };
+
+export const deleteContent = async (postId) => {
+  const result = await pool.query("delete from posts where postid = $1", [
+    postId,
+  ]);
+};

@@ -24,6 +24,7 @@ router.patch(
   validatePostUpdate,
   postController.updatePostContent
 );
+router.delete("/delete-post/:postId", postController.deletePostContent);
 
 router.post("/post-comment", validateComment, commentController.commentContent);
 router.patch(

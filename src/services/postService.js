@@ -7,3 +7,7 @@ export const postContentService = async ({ title, content }, userId) => {
 export const updatePostContentService = async (postId, updateContent) => {
   return await models.updateContent(updateContent, postId);
 };
+
+export const deletePostContentService = async (postId) => {
+  return await models.deleteContent(postId);
+};

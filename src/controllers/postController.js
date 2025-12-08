@@ -23,3 +23,8 @@ export const updatePostContent = async (req, res) => {
   );
   return res.status(201).json({ updatedPost });
 };
+
+export const deletePostContent = async (req, res) => {
+  await postService.deletePostContentService(req.params.postId);
+  return res.status(200).json({ message: "deleted successfully" });
+};
