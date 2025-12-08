@@ -6,10 +6,6 @@ export const commentContent = async (req, res) => {
     req.session.userId,
     req.body.postId
   );
-  console.log(
-    "🚀 ~ commentContent ~ req.validatedComment:",
-    req.validatedComment
-  );
 
   return res.status(201).json({ newComment });
 };
