@@ -11,3 +11,7 @@ export const commentContentService = async (
 export const updateCommentService = async ({ content }, commentId) => {
   return await models.updateComment(content, commentId);
 };
+
+export const deleteCommentService = async (commentId) => {
+  return await models.deleteComment(commentId);
+};

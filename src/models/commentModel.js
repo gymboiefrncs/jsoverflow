@@ -1,3 +1,4 @@
+import e from "express";
 import { pool } from "../config/db.js";
 
 export const insertComment = async (
@@ -20,4 +21,10 @@ export const updateComment = async (content, commentId) => {
     [content, commentId]
   );
   return result.rows[0];
+};
+
+export const deleteComment = async (commentId) => {
+  const result = await pool.query("delete from comments where commentid = $1", [
+    commentId,
+  ]);
 };

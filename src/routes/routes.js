@@ -32,5 +32,9 @@ router.patch(
   validateCommentUpdate,
   commentController.updateCommentContent
 );
+router.delete(
+  "/delete-comment/:commentId",
+  commentController.deleteCommentContent
+);
 
 export default router;

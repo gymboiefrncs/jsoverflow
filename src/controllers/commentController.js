@@ -17,3 +17,8 @@ export const updateCommentContent = async (req, res) => {
   );
   return res.status(201).json({ updateComment });
 };
+
+export const deleteCommentContent = async (req, res) => {
+  await commentService.deleteCommentService(req.params.commentId);
+  return res.status(200).json({ message: "deleted successfully" });
+};
