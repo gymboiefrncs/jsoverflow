@@ -12,3 +12,15 @@ export const validatePost = (req, res, next) => {
   req.validatedPost = result.data;
   next();
 };
+
+export const validatePostUpdate = (req, res, next) => {
+  const result = schema.updatePostSchema.safeParse(req.body);
+
+  if (!result.success) {
+    const errMessage = z.prettifyError(result.error);
+    throw new AppError(errMessage, 400);
+  }
+
+  req.validatedUpdatePost = result.data;
+  next();
+};
