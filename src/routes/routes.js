@@ -7,7 +7,10 @@ import {
   validatePost,
   validatePostUpdate,
 } from "../validators/postValidator.js";
-import { validateComment } from "../validators/commentValidator.js";
+import {
+  validateComment,
+  validateCommentUpdate,
+} from "../validators/commentValidator.js";
 
 const router = express.Router();
 
@@ -23,4 +26,10 @@ router.patch(
 );
 
 router.post("/post-comment", validateComment, commentController.commentContent);
+router.patch(
+  "/edit-post-comment/:commentId",
+  validateCommentUpdate,
+  commentController.updateCommentContent
+);
+
 export default router;

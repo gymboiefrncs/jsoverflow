@@ -7,8 +7,20 @@ export const validateComment = (req, res, next) => {
 
   if (!result.success) {
     const errMessage = z.prettifyError(result.error);
-    return new AppError(errMessage, 400);
+    throw new AppError(errMessage, 400);
   }
   req.validatedComment = result.data;
+  next();
+};
+
+export const validateCommentUpdate = (req, res, next) => {
+  const result = schema.updateCommentSchema.safeParse(req.body);
+
+  if (!result.success) {
+    const errMessage = z.prettifyError(result.error);
+    throw new AppError(errMessage, 400);
+  }
+
+  req.validatedUpdateComment = result.data;
   next();
 };

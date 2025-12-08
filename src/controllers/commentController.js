@@ -9,3 +9,11 @@ export const commentContent = async (req, res) => {
 
   return res.status(201).json({ newComment });
 };
+
+export const updateCommentContent = async (req, res) => {
+  const updateComment = await commentService.updateCommentService(
+    req.validatedUpdateComment,
+    req.params.commentId
+  );
+  return res.status(201).json({ updateComment });
+};

@@ -13,3 +13,11 @@ export const insertComment = async (
 
   return result.rows[0];
 };
+
+export const updateComment = async (content, commentId) => {
+  const result = await pool.query(
+    "update comments set content = $1 where commentid = $2 returning *",
+    [content, commentId]
+  );
+  return result.rows[0];
+};

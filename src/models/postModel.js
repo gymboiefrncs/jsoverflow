@@ -1,5 +1,4 @@
 import { pool } from "../config/db.js";
-import { updatePostContent } from "../controllers/postController.js";
 
 export const insertContent = async (title, content, userId) => {
   const result = await pool.query(

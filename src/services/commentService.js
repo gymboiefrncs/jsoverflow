@@ -7,3 +7,7 @@ export const commentContentService = async (
 ) => {
   return await models.insertComment(content, userId, postId, parentId);
 };
+
+export const updateCommentService = async ({ content }, commentId) => {
+  return await models.updateComment(content, commentId);
+};
