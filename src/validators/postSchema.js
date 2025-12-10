@@ -20,7 +20,7 @@ export const updatePostSchema = z.object({
     .max(49)
     .transform((str) => str.trim())
     .optional(),
-  tags: z.array(z.string().lowercase()),
+
   content: z
     .string()
     .min(1, "Content can't be empty")
