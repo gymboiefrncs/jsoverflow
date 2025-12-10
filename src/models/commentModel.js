@@ -1,7 +1,6 @@
-import e from "express";
 import { pool } from "../config/db.js";
 
-export const insertComment = async (
+export const insertCommentModel = async (
   comment,
   userId,
   postId,
@@ -15,7 +14,7 @@ export const insertComment = async (
   return result.rows[0];
 };
 
-export const updateComment = async (content, commentId) => {
+export const updateCommentModel = async (content, commentId) => {
   const result = await pool.query(
     "update comments set content = $1 where commentid = $2 returning *",
     [content, commentId]
@@ -23,7 +22,7 @@ export const updateComment = async (content, commentId) => {
   return result.rows[0];
 };
 
-export const deleteComment = async (commentId) => {
+export const deleteCommentModel = async (commentId) => {
   const result = await pool.query("delete from comments where commentid = $1", [
     commentId,
   ]);

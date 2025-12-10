@@ -7,12 +7,12 @@ import {
 
 const router = express.Router();
 
-router.post("/post-content", validatePost, postController.postContent);
+router.post("/post-content", validatePost, postController.postController);
 router.patch(
   "/edit-post-content/:postId",
   validatePostUpdate,
-  postController.updatePostContent
+  postController.updatePostController
 );
-router.delete("/delete-post/:postId", postController.deletePostContent);
+router.delete("/delete-post/:postId", postController.deletePostController);
 
 export default router;

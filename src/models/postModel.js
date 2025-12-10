@@ -1,6 +1,6 @@
 import { pool } from "../config/db.js";
 
-export const insertContent = async (title, content, userId, tags) => {
+export const insertPostModel = async (title, content, userId, tags) => {
   const postResult = await pool.query(
     "insert into posts (userid, title, content) values ($1, $2, $3) returning postid, title, content, created_at",
     [userId, title, content]
@@ -16,16 +16,16 @@ export const insertContent = async (title, content, userId, tags) => {
     tagIds.push(tagResult.rows[0].tagid);
   }
 
-  for (const tagid of tagIds) {
+  for (const tagId of tagIds) {
     await pool.query(
       "insert into post_tags (postid, tagid) values ($1, $2) returning *",
-      [postId, tagid]
+      [postId, tagId]
     );
   }
   return postResult.rows[0];
 };
 
-export const updateContent = async (updateContent, postId) => {
+export const updatePostModel = async (updateContent, postId) => {
   const fields = [];
   const values = [];
   let placeholder = 1;
@@ -45,7 +45,7 @@ export const updateContent = async (updateContent, postId) => {
   return result.rows[0];
 };
 
-export const deleteContent = async (postId) => {
+export const deletePostModel = async (postId) => {
   const result = await pool.query("delete from posts where postid = $1", [
     postId,
   ]);

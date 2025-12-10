@@ -4,8 +4,8 @@ import { validateLogin, validateUser } from "../validators/authValidator.js";
 
 const router = express.Router();
 
-router.post("/signup", validateUser, authController.signUp);
-router.post("/login", validateLogin, authController.login);
-router.delete("/logout", authController.logout);
+router.post("/signup", validateUser, authController.signUpController);
+router.post("/login", validateLogin, authController.logInController);
+router.delete("/logout", authController.logOutController);
 
 export default router;

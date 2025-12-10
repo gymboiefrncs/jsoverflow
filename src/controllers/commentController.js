@@ -1,7 +1,7 @@
 import * as commentService from "../services/commentService.js";
 
-export const commentContent = async (req, res) => {
-  const newComment = await commentService.commentContentService(
+export const commentController = async (req, res) => {
+  const newComment = await commentService.commentService(
     req.validatedComment,
     req.session.userId,
     req.body.postId
@@ -10,7 +10,7 @@ export const commentContent = async (req, res) => {
   return res.status(201).json({ newComment });
 };
 
-export const updateCommentContent = async (req, res) => {
+export const updateCommentController = async (req, res) => {
   const updateComment = await commentService.updateCommentService(
     req.validatedUpdateComment,
     req.params.commentId
@@ -18,7 +18,7 @@ export const updateCommentContent = async (req, res) => {
   return res.status(201).json({ updateComment });
 };
 
-export const deleteCommentContent = async (req, res) => {
+export const deleteCommentController = async (req, res) => {
   await commentService.deleteCommentService(req.params.commentId);
   return res.status(200).json({ message: "deleted successfully" });
 };

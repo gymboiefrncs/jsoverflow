@@ -7,13 +7,13 @@ export const signUpService = async (data) => {
   const saltRounds = 10;
   const salt = await bcrypt.genSalt(saltRounds);
   const hashed_password = await bcrypt.hash(password, salt);
-  return await models.insertUser(hashed_password, rest);
+  return await models.insertUserModel(hashed_password, rest);
 };
 
 export const logInService = async (data) => {
   const { password, email } = data;
 
-  const userExist = await models.findUser(email);
+  const userExist = await models.findUserModel(email);
   if (!userExist) throw new AppError("Invalid credentials", 401);
 
   const isPasswordValid = await bcrypt.compare(password, userExist.password);

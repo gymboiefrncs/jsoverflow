@@ -7,15 +7,19 @@ import {
 
 const router = express.Router();
 
-router.post("/post-comment", validateComment, commentController.commentContent);
+router.post(
+  "/post-comment",
+  validateComment,
+  commentController.commentController
+);
 router.patch(
   "/edit-post-comment/:commentId",
   validateCommentUpdate,
-  commentController.updateCommentContent
+  commentController.updateCommentController
 );
 router.delete(
   "/delete-comment/:commentId",
-  commentController.deleteCommentContent
+  commentController.deleteCommentController
 );
 
 export default router;
