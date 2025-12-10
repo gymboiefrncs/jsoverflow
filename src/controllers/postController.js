@@ -1,4 +1,3 @@
-import { application } from "express";
 import * as postService from "../services/postService.js";
 import { AppError } from "../utils/AppError.js";
 
