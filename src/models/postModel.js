@@ -1,11 +1,28 @@
 import { pool } from "../config/db.js";
 
-export const insertContent = async (title, content, userId) => {
-  const result = await pool.query(
+export const insertContent = async (title, content, userId, tags) => {
+  const postResult = await pool.query(
     "insert into posts (userid, title, content) values ($1, $2, $3) returning postid, title, content, created_at",
     [userId, title, content]
   );
-  return result.rows[0];
+  const postId = postResult.rows[0].postid;
+  const tagIds = [];
+
+  for (const tag of tags) {
+    const tagResult = await pool.query(
+      "insert into tags (name) values ($1) returning tagid",
+      [tag]
+    );
+    tagIds.push(tagResult.rows[0].tagid);
+  }
+
+  for (const tagid of tagIds) {
+    await pool.query(
+      "insert into post_tags (postid, tagid) values ($1, $2) returning *",
+      [postId, tagid]
+    );
+  }
+  return postResult.rows[0];
 };
 
 export const updateContent = async (updateContent, postId) => {

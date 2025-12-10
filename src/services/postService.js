@@ -1,7 +1,7 @@
 import * as models from "../models/postModel.js";
 
-export const postContentService = async ({ title, content }, userId) => {
-  return await models.insertContent(title, content, userId);
+export const postContentService = async ({ title, content, tags }, userId) => {
+  return await models.insertContent(title, content, userId, tags);
 };
 
 export const updatePostContentService = async (postId, updateContent) => {
