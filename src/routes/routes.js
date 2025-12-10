@@ -1,27 +1,13 @@
 import express from "express";
-import * as commentController from "../controllers/commentController.js";
+
 import authRouter from "./authRoutes.js";
 import postRouter from "./postRoutes.js";
-
-import {
-  validateComment,
-  validateCommentUpdate,
-} from "../validators/commentValidator.js";
+import commentRouter from "./commentRoutes.js";
 
 const router = express.Router();
 
 router.use("/", authRouter);
 router.use("/", postRouter);
-
-router.post("/post-comment", validateComment, commentController.commentContent);
-router.patch(
-  "/edit-post-comment/:commentId",
-  validateCommentUpdate,
-  commentController.updateCommentContent
-);
-router.delete(
-  "/delete-comment/:commentId",
-  commentController.deleteCommentContent
-);
+router.use("/", commentRouter);
 
 export default router;
