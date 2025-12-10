@@ -1,8 +1,7 @@
 import express from "express";
-import * as authController from "../controllers/authController.js";
 import * as postController from "../controllers/postController.js";
 import * as commentController from "../controllers/commentController.js";
-import { validateLogin, validateUser } from "../validators/authValidator.js";
+import authRouter from "./authRoutes.js";
 import {
   validatePost,
   validatePostUpdate,
@@ -14,9 +13,7 @@ import {
 
 const router = express.Router();
 
-router.post("/signup", validateUser, authController.signUp);
-router.post("/login", validateLogin, authController.login);
-router.delete("/logout", authController.logout);
+router.use("/", authRouter);
 
 router.post("/post-content", validatePost, postController.postContent);
 router.patch(
