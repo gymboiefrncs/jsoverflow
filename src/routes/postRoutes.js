@@ -4,10 +4,17 @@ import {
   validatePost,
   validatePostUpdate,
 } from "../validators/postValidator.js";
+import { validateTags } from "../validators/tagValidator.js";
 
 const router = express.Router();
 
-router.post("/post-content", validatePost, postController.postController);
+router.post(
+  "/post-content",
+  validatePost,
+  validateTags,
+  postController.postController
+);
+
 router.patch(
   "/edit-post-content/:postId",
   validatePostUpdate,

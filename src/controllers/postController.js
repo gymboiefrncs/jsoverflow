@@ -5,6 +5,7 @@ export const postController = async (req, res) => {
   if (!req.session.userId)
     throw new AppError("session expired. please log in", 400);
   const newPost = await postService.postService(
+    req.validatedTags,
     req.validatedPost,
     req.session.userId
   );

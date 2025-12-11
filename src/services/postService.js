@@ -1,7 +1,9 @@
 import * as models from "../models/postModel.js";
-
-export const postService = async ({ title, content }, userId) => {
-  return await models.insertPostModel(title, content, userId);
+import * as tagService from "./tagService.js";
+export const postService = async ({ tags }, { title, content }, userId) => {
+  const tagId = await tagService.createTagService(tags);
+  console.log(tagId);
+  return await models.insertPostModel(title, content, userId, tagId);
 };
 
 export const updatePostService = async (postId, updateContent) => {
