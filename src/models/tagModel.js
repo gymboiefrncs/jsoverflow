@@ -1,13 +1,17 @@
+import { fi } from "zod/locales";
 import { pool } from "../config/db.js";
 
 export const createTagModel = async (tags) => {
   let ids = [];
+  const fields = [];
+  let placeholder = 1;
+
   for (const tag of tags) {
-    const result = await pool.query(
-      "insert into tags (name) values ($1)  returning tagid",
-      [tag]
-    );
-    ids.push(result.rows[0].tagid);
+    fields.push(`($${placeholder++})`);
   }
-  return ids;
+  const result = await pool.query(
+    `insert into tags (name) values ${fields.join(", ")} returning tagid`,
+    tags
+  );
+  return result.rows;
 };

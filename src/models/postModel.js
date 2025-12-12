@@ -1,17 +1,28 @@
+import { fi } from "zod/locales";
 import { pool } from "../config/db.js";
 
 export const insertPostModel = async (title, content, userId, tagId) => {
   const result = await pool.query(
-    "insert into posts (userid, title, content) values ($1, $2, $3) returning postid, title, content, created_at",
+    `
+      insert into posts (userid, title, content) 
+      values ($1, $2, $3) returning postid, title, content, created_at
+    `,
     [userId, title, content]
   );
 
+  let placeholder = 1;
+  const fields = [];
+  const values = [];
   for (const id of tagId) {
-    await pool.query("insert into post_tags (postid, tagid) values ($1, $2)", [
-      result.rows[0].postid,
-      id,
-    ]);
+    values.push(result.rows[0].postid);
+    values.push(id.tagid);
+    fields.push(`($${placeholder++}, $${placeholder++})`);
   }
+  console.log(values);
+  await pool.query(
+    `insert into post_tags (postid, tagid) values ${fields.join(", ")}`,
+    values
+  );
   return result.rows[0];
 };
 

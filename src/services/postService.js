@@ -2,7 +2,6 @@ import * as models from "../models/postModel.js";
 import * as tagService from "./tagService.js";
 export const postService = async ({ tags }, { title, content }, userId) => {
   const tagId = await tagService.createTagService(tags);
-  console.log(tagId);
   return await models.insertPostModel(title, content, userId, tagId);
 };
 
