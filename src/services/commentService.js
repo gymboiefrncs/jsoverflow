@@ -1,11 +1,11 @@
 import * as models from "../models/commentModel.js";
 
-export const commentService = async (
+export const createCommentService = async (
   { content, parentId = null },
   userId,
   postId
 ) => {
-  return await models.insertCommentModel(content, userId, postId, parentId);
+  return await models.createCommentModel(content, userId, postId, parentId);
 };
 
 export const updateCommentService = async ({ content }, commentId) => {

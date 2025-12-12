@@ -1,10 +1,10 @@
 import * as postService from "../services/postService.js";
 import { AppError } from "../utils/AppError.js";
 
-export const postController = async (req, res) => {
+export const createPostController = async (req, res) => {
   if (!req.session.userId)
     throw new AppError("session expired. please log in", 400);
-  const newPost = await postService.postService(
+  const newPost = await postService.createPostService(
     req.validatedTags,
     req.validatedPost,
     req.session.userId

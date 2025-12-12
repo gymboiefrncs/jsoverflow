@@ -1,7 +1,7 @@
 import * as commentService from "../services/commentService.js";
 
-export const commentController = async (req, res) => {
-  const newComment = await commentService.commentService(
+export const createCommentController = async (req, res) => {
+  const newComment = await commentService.createCommentService(
     req.validatedComment,
     req.session.userId,
     req.body.postId

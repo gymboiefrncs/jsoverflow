@@ -1,7 +1,7 @@
 import { fi } from "zod/locales";
 import { pool } from "../config/db.js";
 
-export const insertPostModel = async (title, content, userId, tagId) => {
+export const createPostModel = async (title, content, userId, tagId) => {
   const result = await pool.query(
     `
       insert into posts (userid, title, content) 

@@ -12,7 +12,7 @@ router.post(
   "/post-content",
   validatePost,
   validateTags,
-  postController.postController
+  postController.createPostController
 );
 
 router.patch(

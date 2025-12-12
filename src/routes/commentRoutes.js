@@ -10,7 +10,7 @@ const router = express.Router();
 router.post(
   "/post-comment",
   validateComment,
-  commentController.commentController
+  commentController.createCommentController
 );
 router.patch(
   "/edit-post-comment/:commentId",

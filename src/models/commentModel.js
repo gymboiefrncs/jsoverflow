@@ -1,6 +1,6 @@
 import { pool } from "../config/db.js";
 
-export const insertCommentModel = async (
+export const createCommentModel = async (
   comment,
   userId,
   postId,
