@@ -9,12 +9,16 @@ export const createPostModel = async (title, content, userId, tagId) => {
     `,
     [userId, title, content]
   );
+  await createPostTags(tagId, result.rows[0].postid);
+  return result.rows[0];
+};
 
+const createPostTags = async (tagId, postId) => {
   let placeholder = 1;
   const fields = [];
   const values = [];
   for (const id of tagId) {
-    values.push(result.rows[0].postid);
+    values.push(postId);
     values.push(id);
     fields.push(`($${placeholder++}, $${placeholder++})`);
   }
@@ -22,7 +26,6 @@ export const createPostModel = async (title, content, userId, tagId) => {
     `insert into post_tags (postid, tagid) values ${fields.join(", ")}`,
     values
   );
-  return result.rows[0];
 };
 
 export const updatePostModel = async (tagId, updateContent, postId) => {
