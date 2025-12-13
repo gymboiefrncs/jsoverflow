@@ -1,4 +1,3 @@
-import { fi } from "zod/locales";
 import { pool } from "../config/db.js";
 
 export const createPostModel = async (title, content, userId, tagId) => {
@@ -46,6 +45,12 @@ export const updatePostModel = async (tagId, updateContent, postId) => {
     values
   );
 
+  await updatePostTags(tagId, postId);
+
+  return result.rows[0];
+};
+
+export const updatePostTags = async (postId, tagId) => {
   const postTagFields = [];
   const postTagValues = [];
   let postTagPlaceholder = 1;
@@ -60,8 +65,6 @@ export const updatePostModel = async (tagId, updateContent, postId) => {
     `insert into post_tags (postid, tagid) values ${postTagFields.join(", ")}`,
     postTagValues
   );
-
-  return result.rows[0];
 };
 
 export const deletePostModel = async (postId) => {
