@@ -6,14 +6,14 @@ export const createPostService = async (
   userId
 ) => {
   const tagId = await tagService.createTagService(tags);
-  return await models.createPostModel(title, content, userId, tagId);
+  return models.createPostModel(title, content, userId, tagId);
 };
 
 export const updatePostService = async (postId, { tags }, updateContent) => {
   const tagId = await tagService.createTagService(tags);
-  return await models.updatePostModel(tagId, updateContent, postId);
+  return models.updatePostModel(tagId, updateContent, postId);
 };
 
 export const deletePostService = async (postId) => {
-  return await models.deletePostModel(postId);
+  return models.deletePostModel(postId);
 };
