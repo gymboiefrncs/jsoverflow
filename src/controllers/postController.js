@@ -15,9 +15,9 @@ export const createPostController = async (req, res) => {
 export const updatePostController = async (req, res) => {
   if (!req.session.userId)
     throw new AppError("session expired. please log in", 400);
-
   const updatedPost = await postService.updatePostService(
     req.params.postId,
+    req.validatedTags,
     req.validatedUpdatePost,
     req.session.userId
   );

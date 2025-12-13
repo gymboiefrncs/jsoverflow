@@ -18,6 +18,7 @@ router.post(
 router.patch(
   "/edit-post-content/:postId",
   validatePostUpdate,
+  validateTags,
   postController.updatePostController
 );
 router.delete("/delete-post/:postId", postController.deletePostController);

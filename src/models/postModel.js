@@ -15,10 +15,9 @@ export const createPostModel = async (title, content, userId, tagId) => {
   const values = [];
   for (const id of tagId) {
     values.push(result.rows[0].postid);
-    values.push(id.tagid);
+    values.push(id);
     fields.push(`($${placeholder++}, $${placeholder++})`);
   }
-  console.log(values);
   await pool.query(
     `insert into post_tags (postid, tagid) values ${fields.join(", ")}`,
     values
@@ -26,7 +25,7 @@ export const createPostModel = async (title, content, userId, tagId) => {
   return result.rows[0];
 };
 
-export const updatePostModel = async (updateContent, postId) => {
+export const updatePostModel = async (tagId, updateContent, postId) => {
   const fields = [];
   const values = [];
   let placeholder = 1;
@@ -43,6 +42,22 @@ export const updatePostModel = async (updateContent, postId) => {
     )} where postid = $${placeholder} returning *`,
     values
   );
+
+  const postTagFields = [];
+  const postTagValues = [];
+  let postTagPlaceholder = 1;
+
+  await pool.query("delete from post_tags where postid = $1", [postId]);
+  for (const id of tagId) {
+    postTagFields.push(`($${postTagPlaceholder++}, $${postTagPlaceholder++})`);
+    postTagValues.push(postId, id);
+  }
+
+  await pool.query(
+    `insert into post_tags (postid, tagid) values ${postTagFields.join(", ")}`,
+    postTagValues
+  );
+
   return result.rows[0];
 };
 
